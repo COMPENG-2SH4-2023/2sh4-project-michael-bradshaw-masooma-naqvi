@@ -42,4 +42,16 @@ class GameMechs
 
 };
 
+class Food{
+    private:
+        objPos foodPos;
+        int active = 0;
+    public:
+        Food(objPos &blockOff);
+        ~Food();
+        void generateFood(objPos &blockoff);
+        void getFoodPos(objPos &returnPos);
+        
+}
+
 #endif
