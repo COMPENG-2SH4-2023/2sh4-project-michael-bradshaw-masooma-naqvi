@@ -59,12 +59,13 @@ class Food{
     private:
         objPos foodPos;
         int active = 0;
+        GameMechs* mainGameMechsRef;
     public:
-        Food(objPos &blockOff);
+        Food(GameMechs* thisGMRef);
         ~Food();
-        void generateFood(objPos &blockoff);
+        void generateFood(objPos blockoff);
         void getFoodPos(objPos &returnPos);
         
-}
+};
 
 #endif

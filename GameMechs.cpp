@@ -92,28 +92,31 @@ bool GameMechs::getLoseFlagStatus()
     return loseFlag;
 }
 
-Food::Food(objPos &blockOff){
-    generateFood(objPos blockOff);
+Food::Food(GameMechs* thisGMRef){
+    mainGameMechsRef = thisGMRef;
 }
 
 Food::~Food(){
-    
 }
 
-
-void Food::generateFood(objPos &blockOff){
-    srand(time(NULL));
+void Food::generateFood(objPos blockOff){
     int randomX = 0;
     int randomY = 0;
-    while !(randomX == blockOff.x && randomX == blockOff.y){
-        randomX = rand()%getBoardSizeX();
-        randomY = rand()%getBoardSizeY();
+    srand(time(NULL)); //seed with time
+    bool flag = true;
+    while (flag){
+        randomX = (rand() % (mainGameMechsRef->getBoardSizeX() - 2)) + 1;
+        randomY = (rand() % (mainGameMechsRef->getBoardSizeY() - 2)) + 1;
+        if (randomX == blockOff.x && randomY == blockOff.y){
+            flag = true;
+        }
+        else{
+            flag = false;
+        }
     }
-    foodPos.x = randomX;
-    foodPOs.y = randomY; 
-    foodPos.symbol = 'A';
+    foodPos.setObjPos(randomX, randomY, 'A');
     active = 1; //Meaning that this food is in use.
 }
 void Food::getFoodPos(objPos &returnPos){
-    foodPos.getObjPos(returnPos));
+    foodPos.getObjPos(returnPos);
 }
